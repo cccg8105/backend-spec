@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ComponentDesignSpecification",
+  "description": "Esquema formal para el diseño arquitectónico de componentes en capas y contratos de interfaz",
+  "type": "object",
+  "required": [
+    "class_diagram_mermaid",
+    "sequence_diagram_mermaid",
+    "layers"
+  ],
+  "properties": {
+    "class_diagram_mermaid": {
+      "type": "string",
+      "description": "Diagrama de clases UML en sintaxis Mermaid classDiagram"
+    },
+    "sequence_diagram_mermaid": {
+      "type": "string",
+      "description": "Diagrama de secuencia técnica en sintaxis Mermaid sequenceDiagram"
+    },
+    "layers": {
+      "type": "object",
+      "required": ["presentation", "application", "domain", "infrastructure"],
+      "properties": {
+        "presentation": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "responsibility"],
+            "properties": {
+              "name": { "type": "string" },
+              "responsibility": { "type": "string" },
+              "endpoints": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "application": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "ports_depended_on"],
+            "properties": {
+              "name": { "type": "string" },
+              "ports_depended_on": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "domain": {
+          "type": "object",
+          "properties": {
+            "entities": { "type": "array", "items": { "type": "string" } },
+            "value_objects": { "type": "array", "items": { "type": "string" } },
+            "events": { "type": "array", "items": { "type": "string" } },
+            "invariants_ocl": { "type": "string" }
+          }
+        },
+        "infrastructure": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["name", "implements_port"],
+            "properties": {
+              "name": { "type": "string" },
+              "implements_port": { "type": "string" },
+              "technology": { "type": "string" }
+            }
+          }
+        }
+      }
+    }
+  }
+}

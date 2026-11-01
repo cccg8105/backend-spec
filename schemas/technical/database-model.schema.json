@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DatabaseModelSpecification",
+  "description": "Esquema formal para la especificación del modelo de datos, diccionario de tablas y migraciones",
+  "type": "object",
+  "required": [
+    "er_diagram_mermaid",
+    "tables",
+    "migration_strategy"
+  ],
+  "properties": {
+    "er_diagram_mermaid": {
+      "type": "string",
+      "description": "Diagrama de entidad-relación en sintaxis Mermaid erDiagram"
+    },
+    "tables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "columns"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "storage_engine": { "type": "string" },
+          "columns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "type", "nullable", "key"],
+              "properties": {
+                "name": { "type": "string" },
+                "type": { "type": "string" },
+                "nullable": { "type": "boolean" },
+                "default": { "type": ["string", "null"] },
+                "key": { "type": "string", "enum": ["PK", "FK", "UK", "NONE"] },
+                "description": { "type": "string" }
+              }
+            }
+          },
+          "indices": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "columns"],
+              "properties": {
+                "name": { "type": "string" },
+                "columns": { "type": "array", "items": { "type": "string" } },
+                "type": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "migration_strategy": {
+      "type": "object",
+      "required": ["tool", "rollback_policy"],
+      "properties": {
+        "tool": { "type": "string" },
+        "rollback_policy": { "type": "string" }
+      }
+    }
+  }
+}

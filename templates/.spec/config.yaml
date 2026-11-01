@@ -1,0 +1,29 @@
+# ==============================================================================
+# backend-spec - Configuración del Proyecto
+# ==============================================================================
+
+version: "1.0.0"
+project_name: "my-backend-service"
+
+# Estrategia de versionamiento activa: semver | calver | sequential
+versioning_scheme: "semver"
+current_version: "0.1.0"
+current_milestone: "v0.1.0"
+
+# Archivo manifiesto del código donde se sincroniza la versión de la app
+version_file:
+  path: "package.json"
+  format: "json" # json | toml | xml | regex
+  field: "version"
+
+# Dominios de negocio del proyecto
+domains:
+  - auth
+  - billing
+  - core
+
+# Rutas estándar del framework
+paths:
+  functional_docs: "docs/functional"
+  technical_docs: "docs/technical"
+  backlog: "docs/backlog"

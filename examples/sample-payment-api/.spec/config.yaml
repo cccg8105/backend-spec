@@ -1,0 +1,35 @@
+# ==============================================================================
+# backend-spec v1.0 - Configuración del Proyecto
+# ==============================================================================
+
+version: "1.1.0"
+project_name: "sample-payment-api"
+ecosystem: "node"
+runtime_name: "Node.js / TypeScript (NestJS, Express, Fastify)"
+src_ext: ".ts"
+src_dir: "src"
+test_pattern: "tests/unit/{slug}.spec.ts"
+
+versioning_scheme: "semver"
+current_version: "1.0.0"
+current_milestone: "v1.1.0"
+
+version_file:
+  path: "package.json"
+  format: "json"
+  field: "version"
+
+domains:
+  - core
+
+paths:
+  functional_docs: "docs/functional"
+  technical_docs: "docs/technical"
+  backlog: "docs/backlog"
+  templates: ".spec/templates"
+
+harnesses:
+  - antigravity
+  - cursor
+  - claude
+  - windsurf

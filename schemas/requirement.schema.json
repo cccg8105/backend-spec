@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "RequirementSpecification",
+  "description": "Esquema formal para un requerimiento atómico del backlog (Etapa 3)",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "priority",
+    "impact_type",
+    "target_version",
+    "references",
+    "boundaries",
+    "acceptance_criteria"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^REQ-[A-Z0-9]+-[0-9]{3,}$",
+      "description": "Identificador único (ej. REQ-AUTH-001)"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 5
+    },
+    "priority": {
+      "type": "string",
+      "enum": ["P1", "P2", "P3"]
+    },
+    "impact_type": {
+      "type": "string",
+      "enum": ["MAJOR", "MINOR", "PATCH"]
+    },
+    "track": {
+      "type": "string",
+      "enum": ["FULL", "FAST_TRACK"]
+    },
+    "target_version": {
+      "type": "string",
+      "minLength": 2,
+      "description": "Versión del hito o release asignado (ej. v0.2.0)"
+    },
+    "references": {
+      "type": "object",
+      "required": ["functional", "technical"],
+      "properties": {
+        "functional": { "type": "string" },
+        "technical": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "boundaries": {
+      "type": "object",
+      "required": ["artifacts", "restrictions"],
+      "properties": {
+        "artifacts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["path", "action"],
+            "properties": {
+              "path": { "type": "string", "minLength": 2 },
+              "action": { "type": "string", "enum": ["NEW", "MODIFY", "DELETE"] }
+            }
+          }
+        },
+        "restrictions": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "acceptance_criteria": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["description", "completed"],
+        "properties": {
+          "description": { "type": "string", "minLength": 3 },
+          "completed": { "type": "boolean" }
+        }
+      }
+    }
+  }
+}

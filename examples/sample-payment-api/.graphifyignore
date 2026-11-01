@@ -1,0 +1,93 @@
+# ==============================================================================
+# .graphifyignore - Exclusiones para el Grafo de Conocimiento (Graphify)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Dependencias y Módulos Externos
+# ------------------------------------------------------------------------------
+node_modules/
+vendor/
+.venv/
+venv/
+env/
+__pypackages__/
+packages/
+
+# ------------------------------------------------------------------------------
+# 2. Artefactos de Compilación y Salidas de Build
+# ------------------------------------------------------------------------------
+dist/
+build/
+out/
+target/
+bin/
+obj/
+*.tsbuildinfo
+*.class
+*.jar
+*.war
+*.pyc
+*.pyo
+__pycache__/
+
+# ------------------------------------------------------------------------------
+# 3. Binarios, Librerías Compartidas y Archivos Pesados
+# ------------------------------------------------------------------------------
+*.exe
+*.dll
+*.so
+*.dylib
+*.bin
+*.wasm
+*.iso
+*.dmg
+*.zip
+*.tar.gz
+*.tgz
+*.rar
+
+# ------------------------------------------------------------------------------
+# 4. Variables de Entorno, Credenciales y Secretos (Seguridad Crítica)
+# ------------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.crt
+*.pfx
+*.p12
+credentials.json
+service-account*.json
+secrets.*
+
+# ------------------------------------------------------------------------------
+# 5. Reportes de Pruebas, Cobertura y Logs
+# ------------------------------------------------------------------------------
+coverage/
+.nyc_output/
+*.lcov
+htmlcov/
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# ------------------------------------------------------------------------------
+# 6. Salidas de Herramientas y Cachés del Sistema
+# ------------------------------------------------------------------------------
+.cache/
+.temp/
+.tmp/
+.turbo/
+.next/
+.nuxt/
+.DS_Store
+Thumbs.db
+
+# ------------------------------------------------------------------------------
+# 7. Salida Interna de Graphify
+# (Evitar bucles de reescritura al reindexar)
+# ------------------------------------------------------------------------------
+graphify-out/

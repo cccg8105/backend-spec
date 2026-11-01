@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TechStackSpecification",
+  "description": "Esquema formal para el stack tecnológico, librerías y convenciones transversales",
+  "type": "object",
+  "required": [
+    "core",
+    "conventions",
+    "cross_cutting_policies"
+  ],
+  "properties": {
+    "core": {
+      "type": "object",
+      "required": ["language_runtime", "framework", "database"],
+      "properties": {
+        "language_runtime": { "type": "string" },
+        "framework": { "type": "string" },
+        "orm_or_driver": { "type": "string" },
+        "database": { "type": "string" },
+        "cache": { "type": "string" },
+        "testing_framework": { "type": "string" }
+      }
+    },
+    "conventions": {
+      "type": "object",
+      "required": ["naming"],
+      "properties": {
+        "naming": {
+          "type": "object",
+          "properties": {
+            "files": { "type": "string" },
+            "classes": { "type": "string" },
+            "methods": { "type": "string" },
+            "env_vars": { "type": "string" }
+          }
+        }
+      }
+    },
+    "cross_cutting_policies": {
+      "type": "object",
+      "required": ["error_handling", "logging"],
+      "properties": {
+        "error_handling": { "type": "string" },
+        "logging": { "type": "string" },
+        "validation": { "type": "string" }
+      }
+    }
+  }
+}

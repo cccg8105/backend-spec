@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ApiContractsAndOperationalGuaranteesSpecification",
+  "description": "Esquema formal para contratos de interfaz síncronos/asíncronos y garantías operativas backend (RNFs)",
+  "type": "object",
+  "required": [
+    "artifact_type",
+    "sync_contracts",
+    "operational_guarantees"
+  ],
+  "properties": {
+    "artifact_type": {
+      "type": "string",
+      "enum": ["api-contracts"]
+    },
+    "openapi_or_proto_ref": {
+      "type": "string",
+      "description": "Ruta opcional al archivo openapi.yaml, asyncapi.yaml o .proto"
+    },
+    "sync_contracts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["method", "path", "auth_scope", "status_codes"],
+        "properties": {
+          "method": { "type": "string" },
+          "path": { "type": "string" },
+          "auth_scope": { "type": "string" },
+          "idempotent": { "type": "boolean" },
+          "status_codes": { "type": "string" }
+        }
+      }
+    },
+    "async_events": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["event_name", "channel", "direction"],
+        "properties": {
+          "event_name": { "type": "string" },
+          "channel": { "type": "string" },
+          "direction": { "type": "string", "enum": ["PUBLISH", "CONSUME"] },
+          "dlq_policy": { "type": "string" }
+        }
+      }
+    },
+    "operational_guarantees": {
+      "type": "object",
+      "required": ["idempotency", "concurrency_isolation", "security_rbac", "resilience_sla"],
+      "properties": {
+        "idempotency": { "type": "string", "minLength": 3 },
+        "concurrency_isolation": { "type": "string", "minLength": 3 },
+        "security_rbac": { "type": "string", "minLength": 3 },
+        "resilience_sla": { "type": "string", "minLength": 3 }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+# ==============================================================================
+# backend-spec v1.0 - Pre-commit Hook (Integridad Documental & Anti-Fantasmas)
+# ==============================================================================
+
+# BACKEND-SPEC:START
+echo "🔍 [backend-spec] Validando integridad de especificaciones y trazabilidad del commit (--staged)..."
+
+# 1. Resolver cómo invocar backend-spec de forma portable
+if command -v backend-spec >/dev/null 2>&1; then
+    backend-spec check --staged
+    CHECK_STATUS=$?
+elif command -v spec >/dev/null 2>&1; then
+    spec check --staged
+    CHECK_STATUS=$?
+elif [ -f "./cli/main.py" ]; then
+    if command -v python3 >/dev/null 2>&1; then
+        python3 ./cli/main.py check --staged
+    else
+        python ./cli/main.py check --staged
+    fi
+    CHECK_STATUS=$?
+elif command -v uvx >/dev/null 2>&1; then
+    uvx backend-spec check --staged
+    CHECK_STATUS=$?
+else
+    echo ""
+    echo "❌ [backend-spec] No se encontró el comando 'backend-spec' en PATH."
+    echo "   Instálalo globalmente con: uv tool install backend-spec (o pipx install backend-spec)"
+    echo "   En caso de emergencia operativa, puedes omitir este hook con: git commit --no-verify"
+    echo ""
+    exit 1
+fi
+
+if [ $CHECK_STATUS -ne 0 ]; then
+    echo ""
+    echo "❌ [backend-spec] Commit bloqueado por verificación de integridad o trazabilidad."
+    echo "   • Si hay enlaces o esquemas rotos en docs/, corrígelos o ejecuta 'backend-spec sync'."
+    echo "   • Si modificaste código fuente sin trazabilidad, registra primero el requerimiento en"
+    echo "     docs/backlog/pending.md (ej. 'backend-spec req:new \"Fix...\" --impact PATCH')."
+    echo "   • Escape solo para emergencias críticas en producción: git commit --no-verify"
+    echo ""
+    exit 1
+fi
+
+echo "✔ [backend-spec] Validación y trazabilidad superadas con éxito."
+# BACKEND-SPEC:END
+exit 0

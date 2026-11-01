@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DeploymentStrategySpecification",
+  "description": "Esquema formal para la estrategia de infraestructura, CI/CD, contenedorización y rollout",
+  "type": "object",
+  "required": [
+    "pipeline_diagram_mermaid",
+    "containerization",
+    "health_checks",
+    "rollout_strategy"
+  ],
+  "properties": {
+    "pipeline_diagram_mermaid": {
+      "type": "string",
+      "description": "Diagrama de flujo del pipeline CI/CD en sintaxis Mermaid flowchart"
+    },
+    "containerization": {
+      "type": "object",
+      "required": ["multi_stage", "user_non_root"],
+      "properties": {
+        "multi_stage": { "type": "boolean" },
+        "base_image": { "type": "string" },
+        "user_non_root": { "type": "boolean" }
+      }
+    },
+    "environment_variables": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "description", "is_secret"],
+        "properties": {
+          "name": { "type": "string" },
+          "description": { "type": "string" },
+          "is_secret": { "type": "boolean" }
+        }
+      }
+    },
+    "health_checks": {
+      "type": "object",
+      "required": ["liveness_path", "readiness_path"],
+      "properties": {
+        "liveness_path": { "type": "string" },
+        "readiness_path": { "type": "string" }
+      }
+    },
+    "rollout_strategy": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": { "type": "string", "enum": ["rolling", "canary", "blue_green"] },
+        "abort_criteria": { "type": "string" }
+      }
+    }
+  }
+}

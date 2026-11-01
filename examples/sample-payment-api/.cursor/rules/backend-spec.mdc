@@ -1,0 +1,57 @@
+---
+description: Protocolo backend-spec v1.0 de dos velocidades (Full & Fast-Track PATCH) para Cursor AI
+globs: src/**/*, app/**/*, internal/**/*, docs/**/*
+alwaysApply: true
+---
+
+
+<!-- BACKEND-SPEC:START -->
+# Reglas de Trabajo: backend-spec v1.0 (Cursor AI)
+
+El agente gobierna el ciclo Spec-Driven evitando *commits fantasma* (validados por `backend-spec check --staged`):
+
+## Modos y Comandos de Cursor
+- **Plan Mode (`/plan`):** Obligatorio antes de implementar requerimientos `MAJOR` o `MINOR`.
+- **Comandos incluidos en `.cursor/commands/`:**
+  - `/spec-plan`: Guía especificaciones funcionales/técnicas y orquesta el flujo de dos velocidades.
+  - `/spec-grill`: Entrevista técnica interactiva (mediante `AskQuestion`) para destrabar reglas invariantes y contratos.
+  - `/spec-bootstrap`: Inventaría proyectos *brownfield* existentes apoyándose en `backend-spec bootstrap` y su checklist en disco.
+
+## Protocolo de Dos Velocidades
+1. **PROHIBIDO CODIFICAR SIN BACKLOG:** Todo cambio en código fuente exige un `REQ-*` activo en `docs/backlog/pending.md` cuyas fronteras incluyan los archivos a modificar.
+2. **CARRIL COMPLETO (`MAJOR` / `MINOR`):**
+   - Entrevista ambigüedades con el usuario (apoyándote en `/spec-grill`).
+   - Si el cambio toca un módulo listado como `Detectado (Pendiente As-Is)` en `docs/functional/index.md`, documenta primero su caso de uso *As-Is* antes de planificar la nueva feature.
+   - Crea/actualiza el caso de uso en `docs/functional/use-cases/` usando `.spec/templates/_template_use_case.md` (con YAML Frontmatter, Mermaid y OCL automático para dinero/límites/estados).
+   - Actualiza `docs/technical/` (`database-model.md`, `component-design.md`, `api-contracts.md`) manteniendo máximo 3 filas en Historial de Revisiones.
+   - Registra el `REQ-*` en `pending.md`, ejecuta `backend-spec sync` y `backend-spec check`, y presenta el plan en `/plan`.
+3. **CARRIL FAST-TRACK (`PATCH` / Hotfix sin cambio de contratos ni BD):**
+   - Omite casos de uso y diagramas nuevos (`Referencia Funcional: N/A (PATCH / Fast-Track)`).
+   - Registra el `REQ-* (PATCH)` compacto en `pending.md`, escribe test de regresión, confirma brevemente con el usuario y corrige el defecto.
+4. **GOBERNANZA BROWNFIELD Y AUDITORÍA:**
+   - Trata `docs/backlog/audit-proposals.md` como buzón de solo lectura; nunca modifiques código directamente desde allí salvo promoción explícita a `pending.md`.
+5. **SINCRONIZACIÓN GRAPHIFY:** Al pasar todos los tests, si existe `graphify-out/`, ejecuta `graphify update` (o `/graphify . --update`).
+<!-- BACKEND-SPEC:END -->
+
+<!-- Custom Project Rules -->
+# Reglas de Trabajo: backend-spec v1.0 (Cursor AI)
+
+El agente gobierna el ciclo Spec-Driven evitando *commits fantasma* (validados por `backend-spec check --staged`):
+
+## Modos y Comandos de Cursor
+- **Plan Mode (`/plan`):** Obligatorio antes de implementar requerimientos `MAJOR` o `MINOR`.
+- **Comandos incluidos en `.cursor/commands/`:**
+  - `/spec-plan`: Guía entrevistas y especificaciones funcionales/técnicas.
+  - `/spec-bootstrap`: Inventaría proyectos *brownfield* existentes apoyándose en `backend-spec bootstrap`.
+
+## Protocolo de Dos Velocidades
+1. **PROHIBIDO CODIFICAR SIN BACKLOG:** Todo cambio en código fuente exige un `REQ-*` activo en `docs/backlog/pending.md` cuyas fronteras incluyan los archivos a modificar.
+2. **CARRIL COMPLETO (`MAJOR` / `MINOR`):**
+   - Entrevista ambigüedades con el usuario.
+   - Crea/actualiza el caso de uso en `docs/functional/use-cases/` usando `.spec/templates/_template_use_case.md` (con YAML Frontmatter, Mermaid y OCL automático para dinero/límites/estados).
+   - Actualiza `docs/technical/` (`database-model.md`, `component-design.md`, `api-contracts.md`) manteniendo máximo 3 filas en Historial de Revisiones.
+   - Registra el `REQ-*` en `pending.md`, ejecuta `backend-spec sync` y `backend-spec check`, y presenta el plan en `/plan`.
+3. **CARRIL FAST-TRACK (`PATCH` / Hotfix sin cambio de contratos ni BD):**
+   - Omite casos de uso y diagramas nuevos (`Referencia Funcional: N/A (PATCH / Fast-Track)`).
+   - Registra el `REQ-* (PATCH)` compacto en `pending.md`, escribe test de regresión, confirma brevemente con el usuario y corrige el defecto.
+4. **SINCRONIZACIÓN GRAPHIFY:** Al pasar todos los tests, si existe `graphify-out/`, ejecuta `graphify update` (o `/graphify . --update`).

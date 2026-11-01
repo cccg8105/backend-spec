@@ -1,0 +1,19 @@
+<!-- BACKEND-SPEC:START -->
+# backend-spec v1.0 Rules for Windsurf (Cascade & Workflows)
+
+1. NEVER modify source code (`src/`, `app/`, `internal/`) without an active `REQ-*` in `docs/backlog/pending.md` listing the exact target files (`pre-commit` runs `backend-spec check --staged`).
+2. Classify impact first (`MAJOR`, `MINOR`, or `PATCH`) per `docs/backlog/versioning-strategy.md`.
+3. **Full Track (`MAJOR` / `MINOR`):**
+   - Ask clarifying questions on inputs, invariants, idempotency, concurrency, and RBAC (use `/spec-grill` workflow).
+   - If the task touches a module listed as `Detectado (Pendiente As-Is)` in `docs/functional/index.md`, document its As-Is use case first before planning new modifications.
+   - Create/update functional use cases in `docs/functional/use-cases/` from `.spec/templates/_template_use_case.md` (with YAML Frontmatter, Mermaid diagram, and automatic OCL `pre`/`post`/`inv` for financial, quota, or state-machine logic; skip OCL on simple CRUDs).
+   - Update `docs/technical/` (`database-model.md`, `component-design.md`, `api-contracts.md`) keeping max 3 rows in the Rolling Revision History table.
+   - Generate BDD test scaffolds, register `REQ-*` in `pending.md`, run `backend-spec sync` and `backend-spec check`, present the plan, and wait for user approval.
+4. **Fast-Track (`PATCH` / Hotfix with NO contract or schema changes):**
+   - Skip creating new use cases or Mermaid diagrams (`Referencia Funcional: N/A (PATCH / Fast-Track)`).
+   - Register a compact `REQ-* (PATCH)` in `pending.md`, write a failing regression test, get quick confirmation, and apply the fix.
+5. **Brownfield Governance & Audit:**
+   - Treat `docs/backlog/audit-proposals.md` as read-only; never apply source code changes directly without explicit promotion to `pending.md`.
+6. Workflows in `.windsurf/workflows/`: `/spec-plan`, `/spec-grill`, `/spec-execute`, and `/spec-bootstrap` (for brownfield onboarding with disk checklist).
+7. When `graphify-out/` exists, run `graphify update` (or `/graphify . --update`) after tests pass.
+<!-- BACKEND-SPEC:END -->

@@ -1,0 +1,31 @@
+# Dependencies
+node_modules/
+vendor/
+.venv/
+venv/
+
+# Build outputs
+dist/
+build/
+out/
+target/
+bin/
+*.tsbuildinfo
+
+# Graphify
+graphify-out/
+
+# Environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Tests and coverage
+coverage/
+*.log
+
+# OS
+.DS_Store
+Thumbs.db

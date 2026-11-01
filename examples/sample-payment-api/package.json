@@ -1,0 +1,17 @@
+{
+  "name": "sample-payment-api",
+  "version": "1.0.0",
+  "description": "API de pagos de referencia implementando backend-spec v1.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "@prisma/client": "^5.18.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.0"
+  }
+}
