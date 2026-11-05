@@ -6,7 +6,7 @@
 
 ---
 
-## 🏛️ Arquitectura del Proyecto Inicializado (`v1.1`)
+## Arquitectura del Proyecto Inicializado (`v1.1`)
 
 `backend-spec` separa limpiamente los **moldes del agente** (`.spec/templates/`) del **estado vivo del proyecto** (`docs/`):
 
@@ -48,7 +48,7 @@ docs/
 
 ---
 
-## ⚡ Capacidades Clave en v1.1
+## Capacidades Clave en v1.1
 
 * **Protocolo Gatekeeper de Dos Velocidades:**
   * **Carril Completo (`MAJOR` / `MINOR`):** Entrevista (`/grill-me` en Antigravity o `/spec-grill` en Cursor/Claude/Windsurf) → Caso de Uso con YAML Frontmatter + Mermaid + OCL heurístico → `api-contracts.md` / `database-model.md` → Test *Spec-First* → Gatekeeper `/plan`.
@@ -65,7 +65,7 @@ docs/
 
 ---
 
-## 🚀 Inicio Rápido
+## Inicio Rápido
 
 El CLI está escrito íntegramente en **Python estándar (cero dependencias externas)** y empaquetado desde la raíz con Hatchling.
 
@@ -103,7 +103,7 @@ backend-spec check --staged
 
 ---
 
-## 🔄 Actualización del Framework en Proyectos Existentes (`spec update`)
+## Actualización del Framework en Proyectos Existentes (`spec update`)
 
 Cuando este repositorio se actualiza con mejoras en reglas de agentes, nuevos esquemas, blueprints o hooks:
 
@@ -129,7 +129,7 @@ Cuando este repositorio se actualiza con mejoras en reglas de agentes, nuevos es
 
 ---
 
-## 📂 Estructura del Repositorio
+## Estructura del Repositorio
 
 * `pyproject.toml`: Configuración de empaquetado raíz (Hatchling con `force-include` de plantillas, harnesses y esquemas).
 * `cli/`: Implementación en Python estándar del CLI (`init`, `bootstrap`, `req:new`, `sync`, `check`, `resolve`), detectores de ecosistema y validador de JSON Schema / YAML Frontmatter.
