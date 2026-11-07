@@ -29,4 +29,5 @@ include = [
   "harnesses/**",
   "schemas/**",
   "README.md",
+  "CHANGELOG.md",
 ]

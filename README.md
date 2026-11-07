@@ -132,6 +132,7 @@ Cuando este repositorio se actualiza con mejoras en reglas de agentes, nuevos es
 ## Estructura del Repositorio
 
 * `pyproject.toml`: Configuración de empaquetado raíz (Hatchling con `force-include` de plantillas, harnesses y esquemas).
+* `CHANGELOG.md`: Historial de versiones del framework y CLI adherido a SemVer 2.0 y Keep a Changelog.
 * `cli/`: Implementación en Python estándar del CLI (`init`, `bootstrap`, `req:new`, `sync`, `check`, `resolve`), detectores de ecosistema y validador de JSON Schema / YAML Frontmatter.
 * `schemas/`: Esquemas formales Draft-07 para casos de uso, requerimientos y documentos técnicos.
 * `templates/`: Blueprints de `.spec/templates/`, plantillas base limpias de `docs/`, hook `pre-commit` y comandos por harness.
