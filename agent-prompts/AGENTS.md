@@ -46,7 +46,7 @@ Presenta el plan de implementación acotado a las fronteras del `REQ-*` y **det�
 1. Confirma que el cambio **no modifica contratos públicos de E/S ni esquemas de base de datos**.
 2. Registra el bloque `REQ-[DOMINIO]-[XXX]` con `Tipo: Hotfix / Fix (PATCH - Fast-Track)` y `Referencia Funcional: N/A (PATCH / Fast-Track)` en `docs/backlog/pending.md` (puedes apoyarte en `backend-spec req:new "Título" --domain X --impact PATCH`).
 3. Solicita confirmación breve del usuario indicando los archivos exactos a tocar.
-4. Escribe primero el test de regresión que falla reproduciendo el bug, aplica la corrección y verifica que todos los tests y `backend-spec check` pasen.
+4. Aplica el protocolo `/diagnose`: reproduce, aísla, formula hipótesis y escribe primero el test de regresión que falla capturando el bug (Red). Aplica la corrección mínima y verifica que la suite completa y `backend-spec check` pasen.
 
 ---
 

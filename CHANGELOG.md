@@ -19,6 +19,8 @@ Las versiones se estructuran bajo el esquema `MAJOR.MINOR.PATCH`:
 ## [Unreleased]
 
 ### Added
+- Integración del protocolo formal de diagnóstico (`/diagnose`) en el flujo `PATCH` (Fast-Track) de `agent-prompts/`.
+- Pautas de auditoría de diff y prevención de code smells (`/code-review`) y diseño con *test seams* en la ejecución de requerimientos.
 - Instrucciones de instalación remota directa vía Git (`uv tool install git+...`, `pipx`, `uvx`) en `README.md` para uso sin necesidad de clonar el repositorio.
 
 ### Planned
