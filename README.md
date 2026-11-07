@@ -69,37 +69,39 @@ docs/
 
 El CLI está escrito íntegramente en **Python estándar (cero dependencias externas)** y empaquetado desde la raíz con Hatchling.
 
-### 1. Ejecución directa con los wrappers locales o Python:
-```powershell
-# Inicializar un proyecto nuevo o existente:
-.\spec.ps1 init --dir /ruta/proyecto --harness all --versioning semver
+### 1. Instalación remota sin clonar el repositorio (Recomendada):
 
-# Inventariar arquitectura de un proyecto existente (Brownfield):
-.\spec.ps1 bootstrap --dir /ruta/proyecto
+Puedes instalar y usar el CLI directamente desde GitHub en cualquier proyecto sin necesidad de descargar el código fuente de `backend-spec`:
 
-# Crear requerimientos (Carril Completo o Fast-Track PATCH):
-.\spec.ps1 req:new "Procesar cobro con idempotencia" --domain bill --priority P1 --impact MINOR
-.\spec.ps1 req:new "Corregir redondeo en comisión" --domain bill --priority P1 --impact PATCH
-
-# Sincronizar índices, validar esquemas/fronteras y archivar releases:
-.\spec.ps1 sync --dir /ruta/proyecto
-.\spec.ps1 check --staged --dir /ruta/proyecto
-.\spec.ps1 resolve REQ-BILL-001 --bump --dir /ruta/proyecto
-
-# Actualizar el framework en un proyecto existente (sin tocar docs/):
-.\spec.ps1 update --dir /ruta/proyecto
-.\spec.ps1 update --dry-run --dir /ruta/proyecto
-```
-
-### 2. Instalación o ejecución portable con `uv` / `pipx`:
 ```bash
-# Ejecutar al vuelo desde la raíz del repositorio:
-uvx --from . backend-spec init --dir /ruta/proyecto
+# Instalación global con uv:
+uv tool install git+https://github.com/cccg8105/backend-spec.git
 
-# Instalar globalmente en el sistema:
-uv tool install .
-backend-spec check --staged
+# O instalación con pipx:
+pipx install git+https://github.com/cccg8105/backend-spec.git
+
+# O ejecución al vuelo sin instalar (vía uvx):
+uvx --from git+https://github.com/cccg8105/backend-spec.git backend-spec init --harness all
 ```
+
+Una vez instalado, el comando `backend-spec` (y su alias `spec`) estará disponible en cualquier terminal de tu sistema.
+
+### 2. Uso en repositorios existentes (Brownfield):
+
+Desde la raíz de cualquier proyecto backend existente:
+
+```bash
+# Inicializar la estructura de especificación viva:
+backend-spec init --dir . --harness all --versioning semver
+
+# Escanear e inventariar la arquitectura actual:
+backend-spec bootstrap --dir .
+
+# Validar integridad documental y esquemas:
+backend-spec check --dir .
+```
+
+### 3. Desarrollo local y ejecución con wrappers locales:
 
 ---
 

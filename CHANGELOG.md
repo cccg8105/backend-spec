@@ -18,6 +18,9 @@ Las versiones se estructuran bajo el esquema `MAJOR.MINOR.PATCH`:
 
 ## [Unreleased]
 
+### Added
+- Instrucciones de instalación remota directa vía Git (`uv tool install git+...`, `pipx`, `uvx`) en `README.md` para uso sin necesidad de clonar el repositorio.
+
 ### Planned
 - Soporte para exportación automática de contratos a colecciones Postman y OpenAPI 3.1.
 - Detección ampliada para arquitecturas Serverless (AWS Lambda, Cloudflare Workers).
