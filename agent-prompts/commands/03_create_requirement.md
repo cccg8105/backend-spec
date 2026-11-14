@@ -14,8 +14,12 @@
    - **Referencias:** Rutas reales en `docs/` (incluyendo `docs/technical/api-contracts.md` si toca transporte o RNFs).
    - **Fronteras y Artefactos:** Archivos exactos (`[NEW]`, `[MODIFY]`, `[DELETE]`) coherentes con la extensión del proyecto configurada en `.spec/config.yaml`.
    - **Criterios de Aceptación:** Casillas `- [ ]` verificables mediante tests automatizados.
-4. **Scaffolding BDD / Regresión:**
+4. **Scaffolding BDD / Protocolo de Diagnóstico y Regresión:**
    - En `MAJOR`/`MINOR`: genera el esqueleto *Spec-First* basándote en `.spec/templates/_template_test_spec.md` con anotaciones `@spec`, `@req` y `@businessRule`.
-   - En `PATCH`: prepara el test de regresión que reproduce el defecto.
+   - En `PATCH` (Fast-Track): aplica el protocolo formal de depuración (`/diagnose`):
+     1. Reproducción determinista del error.
+     2. Aislamiento del caso mínimo reproducible.
+     3. Formulación explícita de hipótesis de causa raíz.
+     4. Preparación de la prueba de regresión automatizada permanente (que capture el fallo en fase Red antes de aplicar la solución).
 5. Ejecuta `backend-spec sync` y `backend-spec check` para validar integridad de enlaces y esquemas.
-6. **Gatekeeper:** Presenta el plan (`/plan` en modo completo o resumen rápido en `PATCH`) y espera aprobación del usuario antes de tocar código fuente.
+6. **Gatekeeper:** Presenta el plan (`/plan` en modo completo o resumen de diagnóstico y test de regresión en `PATCH`) y espera aprobación del usuario antes de tocar código fuente.
